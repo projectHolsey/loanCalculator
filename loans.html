@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slider Example</title>
+<style>
+    /* Optional styling for the slider */
+    .slider {
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+
+<h2>Slider Example</h2>
+
+<label> 
+    <p>
+    Values needed:
+    Interest | Start amount | Base Pay per month | Yearly extra | Additional pay per month | End amount
+    </p>
+    <p>
+        Output needed:
+        Total interest | Months total
+    </p>
+    <p>
+        Additional options for later : 
+        "Add comparison values"
+    </p>
+</label>
+
+<label for="slider">Interest Rate : <span id="sliderValue">50</span></label>
+<input type="range" id="interestSlider" name="slider" min="0.0" max="100.0" value="5.0" step="0.1"  class="slider">
+
+<div id="graphContainer"></div>
+
+<h2>Summary</h2>
+<table id="SummaryTable">
+    <th>
+        <tr>
+            <td>
+                Input values
+            </td>
+            <td>
+                Output values
+            </td>
+        </tr>
+    </th>
+</table>
+
+<script src="loans.js"></script>
+
+</body>
+</html>
