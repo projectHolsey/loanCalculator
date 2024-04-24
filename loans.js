@@ -8,7 +8,8 @@ let inputMonthContribution = 1000;
 let inputMonthExtraInput = 500;
 let inputYearExtra = 2000;
 
-let chartData = [];
+let yCoordinates = [];
+let xCoordinates = [];
 
 let inputInterestRate = 5;
 
@@ -17,90 +18,101 @@ function calculateValues() {
 
     let tmp_loan = inputLoanAmount;
 
-    chartData.push(tmp_loan);
+    yCoordinates.push(tmp_loan);
 
+    const limit = 150;
+    let counter = 0;
+
+    
     while (tmp_loan > 0) {
+
+        if (counter > limit) {
+            break;
+        }
+        counter++;
+
         // Add 1 to output mpnths
         outputMonthsTotal += 1;
         // Add monthly interest to total interest
-        outputInterestAddedTotal += (tmp_loan * inputInterestRate) / 12;
+        outputInterestAddedTotal += parseInt((tmp_loan * (inputInterestRate / 100)) / 12);
+        
+        
         // Add monthly interest to current loan
-        tmp_loan += (tmp_loan * inputInterestRate) / 12;
+        tmp_loan += parseInt((tmp_loan * (inputInterestRate / 100)) / 12);
+        
+        
         // remove the monthly contributions
-        tmp_loan -= inputMonthContribution + inputMonthExtraInput;
+        tmp_loan -= parseInt(inputMonthContribution + inputMonthExtraInput);
+
         
         // every 12 months, remove the yearly extra
         if (outputMonthsTotal % 12 == 0) {
             tmp_loan -= inputYearExtra;
         } 
 
-        outputTotalPaid += inputMonthContribution + inputMonthExtraInput + ((tmp_loan * inputInterestRate) / 12);
+        outputTotalPaid += parseInt(inputMonthContribution + inputMonthExtraInput + ((tmp_loan * inputInterestRate) / 12));
 
+        // Set the value to 0
+        if (tmp_loan < 0) {
+            tmp_loan = 0;
+        }
         // add a point for the chart data
-        chartData.push(tmp_loan);
+        yCoordinates.push(tmp_loan);
+
+        xCoordinates.push(counter);
     }
 
-}
-    
-function renderChart() {
+    // calculate final y-cordinate
+    xCoordinates.push(counter + 0.2);
 
-    // Sample data for the chart
-    // const labels = ['January', 'February', 'March', 'April', 'May', 'June'];
-    const data = {
-    //   labels: labels,
-      datasets: [{
-        label: 'Loan Payback',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: chartData,
-        fill: true,
-      }]
+
+}
+
+function renderChartv2() {     
+
+    // Define custom tick values for x-axis
+    let tickVals = [];
+    let tickText = [];
+    let increment = Math.ceil(xCoordinates.length / 15);
+    if (increment === 0){
+        increment = 1;
+    }
+    for (let i = 0; i < 150; i += increment) {
+        tickVals.push(parseInt(i));
+        tickText.push(i.toString()); 
+    }
+
+    // Create data trace
+    const trace = {
+      x: xCoordinates,
+      y: yCoordinates,
+      mode: 'lines',
+      type: 'scatter'
     };
 
-    // Configuration options
-    const config = {
-      type: 'line',
-      data: data,
-      options: {
-        responsive: true,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Line Chart Example'
-          }
-        },
-        scales: {
-          x: {
-            display: true,
-            title: {
-              display: true,
-              text: 'Month'
-            }
-          },
-          y: {
-            display: true,
-            title: {
-              display: true,
-              text: 'Value'
-            }
-          }
-        }
+    // Create layout
+    const layout = {
+      xaxis: {
+        tickvals: tickVals,
+        ticktext: tickText,
+        title: 'Months'
       },
+      yaxis: {
+        title: 'Loan left'
+      },
+      title: 'Plotly Line Chart Example'
     };
 
-    // Create the chart
-    const myChart = new Chart(
-      document.getElementById('myLineChart'),
-      config
-    );
-
+    // Plot the chart
+    Plotly.newPlot('myPlot', [trace], layout);
 }
+
+
 
 function addTableValues() {
     const inTable = document.getElementById("SummaryTableIn");
     const outTable = document.getElementById("SummaryTableOut");
 
-    
     // Create an empty <tr> element and add it to the 1st position of the table:
     var row = table.insertRow(0);
 
@@ -136,20 +148,28 @@ function addTableValues() {
     cell1.innerHTML = "Yearly additional contribution";
     cell2.innerHTML = inputInterestRate;
         
-    
 }
 
 
 function calculateAndRender() {
 
+   
+    yCoordinates = [];
+    xCoordinates = [];
+    outputMonthsTotal = 0;
+    outputInterestAddedTotal = 0;
+    outputTotalPaid = 0;
+    // Clear the existing plot
+    Plotly.purge('myPlot');
+
+    calculateValues();
+    console.log( inputLoanAmount, inputMonthContribution, inputMonthExtraInput, inputYearExtra);
+    renderChartv2();
+
 }
 
 
 function main() {
-
-
-    calculateValues();
-    renderChart();
 
     // JavaScript to update the slider value dynamically
     const interestRateInput = document.getElementById('interestRateInput');
@@ -164,23 +184,23 @@ function main() {
     inputYearExtra = 2000;
     
     interestRateInput.addEventListener('input', function() {
-        inputInterestRate = this.value;
+        inputInterestRate = parseFloat(this.value);
         calculateAndRender();
     });
     loanInput.addEventListener('input', function() {
-        inputLoanAmount = this.value;
+        inputLoanAmount = parseInt(this.value);
         calculateAndRender();
     });
     monthlyInput.addEventListener('input', function() {
-        inputMonthContribution = this.value;
+        inputMonthContribution = parseInt(this.value);
         calculateAndRender();
     });
     monthlyExtraInput.addEventListener('input', function() {
-        inputMonthExtraInput = this.value;
+        inputMonthExtraInput = parseInt(this.value);
         calculateAndRender();
     });
     yearlyExtraInput.addEventListener('input', function() {
-        inputYearExtra = this.value;
+        inputYearExtra = parseInt(this.value);
         calculateAndRender();
     });
 
