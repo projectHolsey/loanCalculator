@@ -18,37 +18,45 @@
         "Add comparison values"
     </p>
 </label>
+<div style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
+    <div style="display: flex;">
+        <div style="display: inline-block; width: 500px;  align-content: center;">
+            
+            <div style="display: flex; flex-direction: row; justify-content: center;">
+                <h1>Input options</h1>
+            </div>
 
-<div style="display: inline-block; width: 700px;">
-    <div style="height: 30px;">
-        <label for="interestRateInput">Interest Rate (%) : </label>
-        <input style="float:right;" type="number" id="interestRateInput" name="interestRateInput" min="0" max="100" value="5" step="0.01">
-    </div>
-    
-    <div style="height: 30px;">
-        <label for="loanInput">Loan amount ($) : </label>
-        <input style="float:right;" type="number" id="loanInput" name="loanInput" min="0" max="1000000" value="10000">
-    </div>
-    <div style="height: 30px;">
-        <label for="monthlyInput">Minimum monthly ($) : </label>
-        <input style="float:right;" type="number" id="monthlyInput" name="monthlyInput" min="0" max="1000000" value="1000">
-    </div>
-    <div style="height: 30px;">
-        <label for="monthlyExtraInput">Extra monthly contribution ($) : </label>
-        <input style="float:right;" type="number" id="monthlyExtraInput" name="monthlyExtraInput" min="0" max="1000000" value="500">
-    </div>
-    <div style="height: 30px;">
-        <label for="yearlyExtraInput">One off yearly contribution ($) : </label>
-        <input style="float:right;" type="number" id="yearlyExtraInput" name="yearlyExtraInput" min="0" max="1000000" value="2000">
+            <div style="height: 30px;">
+                <label for="interestRateInput">Interest Rate (%) : </label>
+                <input style="float:right;" type="number" id="interestRateInput" name="interestRateInput" min="0" max="100" value="5" step="0.01">
+            </div>
+            
+            <div style="height: 30px;">
+                <label for="loanInput">Loan amount ($) : </label>
+                <input style="float:right;" type="number" id="loanInput" name="loanInput" min="0" max="1000000" value="10000">
+            </div>
+            <div style="height: 30px;">
+                <label for="monthlyInput">Minimum monthly ($) : </label>
+                <input style="float:right;" type="number" id="monthlyInput" name="monthlyInput" min="0" max="1000000" value="1000">
+            </div>
+            <div style="height: 30px;">
+                <label for="monthlyExtraInput">Extra monthly contribution ($) : </label>
+                <input style="float:right;" type="number" id="monthlyExtraInput" name="monthlyExtraInput" min="0" max="1000000" value="500">
+            </div>
+            <div style="height: 30px;">
+                <label for="yearlyExtraInput">One off yearly contribution ($) : </label>
+                <input style="float:right;" type="number" id="yearlyExtraInput" name="yearlyExtraInput" min="0" max="1000000" value="2000">
+            </div>
+        </div>
+        <div style="width: 800px; height: 500px; float:right;">
+            <!-- <canvas id="myLineChart"></canvas> -->
+            <div id="myPlot"></div>
+        </div>
     </div>
 </div>
 
 
 
-<div style="width: 800px; height: 500px;">
-    <!-- <canvas id="myLineChart"></canvas> -->
-  <div id="myPlot"></div>
-</div>
 
 <h2>Summary</h2>
 <table id="SummaryTableIn">

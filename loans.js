@@ -100,7 +100,6 @@ function renderChartv2() {
       yaxis: {
         title: 'Loan left'
       },
-      title: 'Plotly Line Chart Example'
     };
 
     // Plot the chart
