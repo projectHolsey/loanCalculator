@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Loan calculator</title>
 
+<link rel="stylesheet" href="loans.css">
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -12,12 +14,6 @@
 </head>
 <body>
 
-<label> 
-    <p>
-        Additional options for later : 
-        "Add comparison values"
-    </p>
-</label>
 <div style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
     <div style="display: flex;">
         <div style="display: inline-block; width: 500px;  align-content: center;">
@@ -55,36 +51,21 @@
     </div>
 </div>
 
+<h2 style="width: 100%; display: flex; flex-direction: row; justify-content: center;">Summary</h2>
 
+<div style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
 
+    <table id="SummaryTableIn" style="margin-right: 25px; border: 2.5px solid black;"></table>
+    <table id="SummaryTableOut" style="border: 2.5px solid black;"></table>
+</div>
 
-<h2>Summary</h2>
-<table id="SummaryTableIn">
-    <th>
-        <tr>
-            <td>
-                Input options
-            </td>
-            <td>
-                Values
-            </td>
-        </tr>
-    </th>
-</table>
+<h3 style="width: 100%; display: flex; flex-direction: row; justify-content: center;">Export options</h3>
+<div style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
+    <button style="margin-right: 15px;">CSV</button>
+    <button style="margin-right: 15px;">JSON</button>
+    <button>Excel</button>
 
-<table id="SummaryTableOut">
-    <th>
-        <tr>
-            <td>
-                Output items
-            </td>
-            <td>
-                Values
-            </td>
-        </tr>
-    </th>
-</table>
-
+</div>
 
 
 <script src="loans.js"></script>

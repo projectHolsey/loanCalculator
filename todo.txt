@@ -1,0 +1,13 @@
+todo asap
+- Add output to table
+- Fix the total paid 
+
+
+INTERMEDIATE
+- Make export to CSV
+- Make export to excel
+
+
+FUTURE
+- Move the html into a js function that creates the new div structure e.t.c
+- Make an 'overall' table Output
