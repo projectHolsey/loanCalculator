@@ -52,6 +52,8 @@ function calculateValues() {
 
         outputTotalPaid += parseInt(inputMonthContribution + inputMonthExtraInput + ((tmp_loan * inputInterestRate) / 12));
 
+        console.log(outputTotalPaid)
+
         // Set the value to 0
         if (tmp_loan < 0) {
             tmp_loan = 0;
@@ -112,8 +114,13 @@ function addTableValues() {
     const inTable = document.getElementById("SummaryTableIn");
     const outTable = document.getElementById("SummaryTableOut");
 
+    inTable.innerHTML = "";
+    outTable.innerHTML = "";
+
+    /** INPUT **/
+
     // Create an empty <tr> element and add it to the 1st position of the table:
-    var row = table.insertRow(0);
+    var row = inTable.insertRow(0);
 
     // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
     var cell1 = row.insertCell(0);
@@ -121,31 +128,56 @@ function addTableValues() {
 
     // Add some text to the new cells:
     cell1.innerHTML = "Loan amount";
-    cell2.innerHTML = inputLoanAmount;
+    cell2.innerHTML = "$" + inputLoanAmount;
 
-    row = table.insertRow(1);
+    row = inTable.insertRow(1);
     cell1 = row.insertCell(0);
     cell2 = row.insertCell(1);
     cell1.innerHTML = "Interest Rate";
-    cell2.innerHTML = inputInterestRate;
+    cell2.innerHTML = inputInterestRate + "%";
 
-    row = table.insertRow(2);
+    row = inTable.insertRow(2);
     cell1 = row.insertCell(0);
     cell2 = row.insertCell(1);
     cell1.innerHTML = "Monthly contribution";
-    cell2.innerHTML = inputInterestRate;
+    cell2.innerHTML = "$" + inputInterestRate;
 
-    row = table.insertRow(3);
+    row = inTable.insertRow(3);
     cell1 = row.insertCell(0);
     cell2 = row.insertCell(1);
     cell1.innerHTML = "Additional monthly contribution";
-    cell2.innerHTML = inputInterestRate;
+    cell2.innerHTML = "$" + inputInterestRate;
 
-    row = table.insertRow(4);
+    row = inTable.insertRow(4);
     cell1 = row.insertCell(0);
     cell2 = row.insertCell(1);
     cell1.innerHTML = "Yearly additional contribution";
-    cell2.innerHTML = inputInterestRate;
+    cell2.innerHTML = "$" + inputInterestRate;
+
+    /** OUTPUT **/
+    // Create an empty <tr> element and add it to the 1st position of the table:
+    row = outTable.insertRow(0);
+
+    // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+    cell1 = row.insertCell(0);
+    cell2 = row.insertCell(1);
+
+    // Add some text to the new cells:
+    cell1.innerHTML = "Total Months";
+    cell2.innerHTML = outputMonthsTotal;
+
+    row = outTable.insertRow(1);
+    cell1 = row.insertCell(0);
+    cell2 = row.insertCell(1);
+    cell1.innerHTML = "Total Interest Added";
+    cell2.innerHTML = "$" + outputInterestAddedTotal;
+
+    row = outTable.insertRow(2);
+    cell1 = row.insertCell(0);
+    cell2 = row.insertCell(1);
+    cell1.innerHTML = "Total Paid";
+    cell2.innerHTML = "$" + outputTotalPaid;
+
         
 }
 
@@ -165,6 +197,8 @@ function calculateAndRender() {
     console.log( inputLoanAmount, inputMonthContribution, inputMonthExtraInput, inputYearExtra);
     renderChartv2();
 
+    addTableValues();
+
 }
 
 
@@ -181,6 +215,8 @@ function main() {
     inputMonthContribution = 1000;
     inputMonthExtraInput = 500;
     inputYearExtra = 2000;
+
+
     
     interestRateInput.addEventListener('input', function() {
         inputInterestRate = parseFloat(this.value);
