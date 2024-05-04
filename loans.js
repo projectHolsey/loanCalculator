@@ -143,6 +143,11 @@ function addTableValues() {
 
     /** INPUT **/
 
+    inTable.innerHTML = "";
+    outTable.innerHTML = "";
+
+    /** INPUT **/
+
     // Create an empty <tr> element and add it to the 1st position of the table:
     var row = inTable.insertRow(0);
 
@@ -153,13 +158,17 @@ function addTableValues() {
     // Add some text to the new cells:
     cell1.innerHTML = "Loan amount";
     cell2.innerHTML = "$" + inputLoanAmount;
+    cell2.innerHTML = "$" + inputLoanAmount;
 
+    row = inTable.insertRow(1);
     row = inTable.insertRow(1);
     cell1 = row.insertCell(0);
     cell2 = row.insertCell(1);
     cell1.innerHTML = "Interest Rate";
     cell2.innerHTML = inputInterestRate + "%";
+    cell2.innerHTML = inputInterestRate + "%";
 
+    row = inTable.insertRow(2);
     row = inTable.insertRow(2);
     cell1 = row.insertCell(0);
     cell2 = row.insertCell(1);
@@ -167,11 +176,13 @@ function addTableValues() {
     cell2.innerHTML = "$" + inputMonthContribution;
 
     row = inTable.insertRow(3);
+    row = inTable.insertRow(3);
     cell1 = row.insertCell(0);
     cell2 = row.insertCell(1);
     cell1.innerHTML = "Additional monthly contribution";
     cell2.innerHTML = "$" + inputMonthExtraInput;
 
+    row = inTable.insertRow(4);
     row = inTable.insertRow(4);
     cell1 = row.insertCell(0);
     cell2 = row.insertCell(1);
